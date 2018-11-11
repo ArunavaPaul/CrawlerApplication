@@ -39,5 +39,21 @@ public class CrawlerAppControllerTest {
 		assertEquals(appController.crawlUrl("vogella.com",20), obj);
 		
 	}
+	
+	@Test(expected = Exception.class)
+	public void testController2() throws Exception {
+		when(crawlerService.crawlService("https://xyz.com", 20)).thenThrow(new Exception());
+		
+		appController.crawlUrl("xyz.com",20);
+	}
+	
+	@Test
+    public void testController3() throws Exception {
+		
+		when(crawlerService.crawlService("https://volla.com", 20)).thenReturn(obj);
+		
+		assertEquals(appController.crawlUrl("https://volla.com",20), obj);
+		
+	}
 
 }
